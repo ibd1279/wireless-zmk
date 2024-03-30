@@ -92,10 +92,10 @@
             // |       |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
             //                       |      |      |      |      |      |      |      |      |      |      |      |      |
             bindings = <
-            &trans &trans &trans &trans           &trans &trans                                          &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans           &trans &trans                                          &trans &trans &trans &trans &trans &trans
-            &trans &trans &trans &trans           &trans &trans &bt BT_CLR &out OUT_TOG   &trans &trans &trans &trans &trans &trans &trans &trans
-                                 &bt BT_CLEAR_ALL &trans &trans &bt BT_PRV  &bt BT_NXT     &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans         &trans &trans                                          &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans         &trans &trans                                          &trans &trans &trans &trans &trans &trans
+            &trans &trans &trans &trans         &trans &trans &bt BT_CLR &out OUT_TOG    &trans &trans &trans &trans &trans &trans &trans &trans
+                                 &bt BT_CLR_ALL &trans &trans &bt BT_PRV &bt BT_NXT      &trans &trans &trans &trans &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
