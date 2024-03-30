@@ -8,29 +8,78 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
-/* Uncomment this block if using RGB
+#define DEF 0
+#define QWE 1
+#define NUM 2
+#define NAV 3
+#define ADJ 5
+
 &led_strip {
-    chain-length = <6>;
-    // chain-length = <31>; // Uncomment if using both per-key and underglow LEDs
+    // chain-length = <6>;
+    chain-length = <31>; // Uncomment if using both per-key and underglow LEDs
     // chain-length = <25>; // Uncomment if using only per-key LEDs.
 };
- */
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            // ---------------------------------------------------------------------------------------------------------------------------------
-            // |  ESC  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \  |
-            // |  TAB  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
-            // | SHIFT |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | LAYER 1 | L SHIFT |  N   |  M    |  ,    |  .   |   /   | CTRL |
-            //                     | GUI  | DEL  | RET  |  SPACE  |   ESC   |  |   RET   |  SPACE  | TAB  | BSPC  | R-ALT |
+            // -----------------------------------------------------------------------------------------------------------------------------------
+            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \   |
+            // |  ESC  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '   |
+            // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  NONE   | NONE    |  |  ADJ    |  WORD   |  N   |  M    |  ,    |  .   |   /   | SHIFT |
+            //                     | LCTL | LALT | LGUI |  SPACE  |   NAV   |  | REPEAT  |  SPACE  | NUM  | NONE  | BSPC  |
             bindings = <
-            &kp ESC   &kp Q &kp W &kp E &kp R &kp T                                                  &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSLH
-            &kp TAB   &kp A &kp S &kp D &kp F &kp G                                                  &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-            &kp LSHFT &kp Z &kp X &kp C &kp V &kp B &kp LSHFT &kp LSHFT            &mo 1   &kp LSHFT &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RCTRL
-                                  &kp LGUI &kp DEL &kp RET &kp SPACE &kp ESC       &kp RET &kp SPACE &kp TAB &kp BSPC &kp RALT
+            &kp TAB   &kp SQT  &kp COMMA &kp DOT   &kp P    &kp Y                                                  &kp F    &kp G    &kp C    &kp R   &kp L   &kp FSLH
+            &kp ESC   &kp A    &kp O     &kp E     &kp U    &kp I                                                  &kp D    &kp H    &kp T    &kp N   &kp S   &mt RET MINUS
+            &kp LSHFT &kp SEMI &kp Q     &kp J     &kp K    &kp X    &none     &none        &mo ADJ     &caps_word &kp B    &kp M    &kp W    &kp V   &kp Z   &kp RSHFT
+                                         &kp LCTRL &kp LALT &kp LGUI &kp SPACE &mo NAV      &key_repeat &none      &mo NUM  &none    &kp BSPC
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+        qwerty_layer {
+            // ---------------------------------------------------------------------------------------------------------------------------------
+            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   \   |
+            // |  ESC  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '   |
+            // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  NONE   |  NONE   |  |  ADJ    | L SHIFT |  N   |  M    |  ,    |  .   |   /   | SHIFT |
+            //                     | LCTL | LALT | LGUI |  SPACE  |   NAV   |  | REPEAT  |  SPACE  | NUM  | NONE  | BSPC  |
+            bindings = <
+            &kp TAB   &kp Q &kp W &kp E     &kp R    &kp T                                                  &kp Y    &kp U    &kp I     &kp O   &kp P    &kp BSLH
+            &kp ESC   &kp A &kp S &kp D     &kp F    &kp G                                                  &kp H    &kp J    &kp K     &kp L   &kp SEMI &mt RET SQT
+            &kp LSHFT &kp Z &kp X &kp C     &kp V    &kp B    &none     &none        &mo ADJ     &caps_word &kp N    &kp M    &kp COMMA &kp DOT &kp FSLH &kp RSHFT
+                                  &kp LCTRL &kp LALT &kp LGUI &kp SPACE &mo NAV      &key_repeat &kp SPACE  &mo NUM  &none    &kp BSPC
+            > ;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+        number_layer {
+            // ---------------------------------------------------------------------------------------------------------------------------------
+            // | NONE  |  0  |  9  |  8   |  7   |  6   |                                          |  ^   |  &    |  *    |  (   |   )   | BSPC  |
+            // | GRAVE |  1  |  2  |  3   |  4   |  5   |                                          |  %   |  $    |  #    |  @   |   !   |   ~   |
+            // | NONE  |  -  |  =  |  [   |  ]   |  \   | L SHIFT | L SHIFT |  | LAYER 1 | L SHIFT |  |   |  {    |  }    |  +   |   _   | SHIFT |
+            //                     | LCTL | LALT | LGUI |  SPACE  |   NAV   |  | REPEAT  |  SPACE  | NUM  | NONE  | BSPC  |
+            bindings = <
+            &none     &kp N0    &kp N9    &kp N8    &kp N7   &kp N6                                              &kp CARET &kp AMPS &kp STAR &kp LPAR &kp RPAR  &kp BSPC
+            &kp GRAVE &kp N1    &kp N2    &kp N3    &kp N4   &kp N5                                              &kp PRCNT &kp DLLR &kp HASH &kp AT   &kp EXCL  &kp TILDE
+            &none     &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &none     &none        &none     &none     &kp PIPE  &kp LBRC &kp RBRC &kp PLUS &kp UNDER &kp RSHFT
+                                          &trans    &trans   &trans   &trans    &trans       &trans    &trans    &trans    &trans   &trans  
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+        navigation_layer {
+            // ---------------------------------------------------------------------------------------------------------------------------------
+            // |  INS  | NONE| NONE| PG_UP| NONE | NONE |                                          | NONE | NONE  | UP    | NONE | NONE  | DEL   |
+            // | NONE  | NONE| HOME| PG_DN| END  | NONE |                                          | NONE | LEFT  | DOWN  | RIGHT| NONE  | NONE  |
+            // | SHIFT | UNDO| CUT | COPY | PASTE| REDO | NONE    | NONE    |  | NONE    | NONE    | G(|) | G({)  |G(S(A))| G(}) | NONE  | SHIFT |
+            //                     | TRNS | TRNS | TRNS |  TRNS   |  TRNS   |  |  TRNS   |  TRNS   | TRNS | TRNS  | TRNS  |
+            bindings = <
+            &kp INS   &none     &none     &kp PG_UP &none     &none                                                &none        &none        &kp UP        &none        &none     &kp DEL
+            &none     &none     &kp HOME  &kp PG_DN &kp END   &none                                                &none        &kp LEFT     &kp DOWN      &kp RIGHT    &none     &none
+            &kp LSHFT &kp LG(Z) &kp LG(X) &kp LG(C) &kp LG(V) &kp LG(Y) &none     &none        &none     &none     &kp LG(PIPE) &kp LG(LBRC) &kp LG(LS(A)) &kp LG(RBRC) &none     &kp RSHFT
+                                          &trans    &trans    &trans    &trans    &trans       &trans    &trans    &trans       &trans       &trans  
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
