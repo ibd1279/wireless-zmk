@@ -99,7 +99,7 @@
             bindings = <
             &none           &rgb_ug RGB_BRI &rgb_ug RGB_BRD &none &none &bt BT_CLR_ALL                                               &kp C_VOL_UP &trans     &trans &trans &trans &rgb_ug RGB_TOG
             &rgb_ug RGB_HUI &rgb_ug RGB_SAI &rgb_ug RGB_SPI &none &none &none                                                        &kp C_VOL_DN &trans     &trans &trans &trans &rgb_ug RGB_EFF
-            &rgb_ug RGB_HUD &rgb_ug RGB_SAD &rgb_ug RGB_SPD &none &none &bt BT_CLR     &none        &bt BT_SEL 1    &none &none      &kp C_MUTE   &trans     &trans &trans &trans &rgb_up RGB_EFR
+            &rgb_ug RGB_HUD &rgb_ug RGB_SAD &rgb_ug RGB_SPD &none &none &bt BT_CLR     &none        &bt BT_SEL 1    &none &none      &kp C_MUTE   &trans     &trans &trans &trans &rgb_ug RGB_EFR
                                                             &none &none &none          &bt BT_SEL 3 &bt BT_SEL 2    &none &kp C_PREV &kp C_PP     &kp C_NEXT &trans
             >;
 
